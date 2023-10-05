@@ -20,6 +20,6 @@ output "aks_ra_principal_id" {
 
 output "aks_nodepool_ids" {
   value = [
-      for key, value in azurerm_kubernetes_cluster_node_pool.allianz-demo-nodepools : value.id
+      for key, value in azurerm_kubernetes_cluster_node_pool.allianz-demo-nodepools : value.name
   ]
 }
