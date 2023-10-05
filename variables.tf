@@ -1,24 +1,24 @@
-variable "rg-name" {
+variable "rg_name" {
   description = "Name of Resource Group"
   type        = string
 }
 
-variable "rg-location" {
+variable "rg_location" {
   description = "Location of Resource Group"
   type        = string
 }
 
-variable "acr-name" {
+variable "acr_name" {
   description = "Name of ACR"
   type        = string
 }
 
-variable "aks-name" {
+variable "aks_name" {
   description = "Name of AKS"
   type        = string
 }
 
-variable "nodepool-name" {
+variable "nodepool_name" {
   description = "Name of Node Pool"
   type        = string
 }
