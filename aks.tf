@@ -34,18 +34,18 @@ resource "azurerm_role_assignment" "allianz-demo-aks-ra" {
 
 resource "azurerm_kubernetes_cluster_node_pool" "allianz-demo-nodepools" {
 
-  for_each = toset([
-    for key in var.additional_nodepool_names : key
-    if key != ""
-  ])
+  for_each = {
+    for key, value in var.additional_nodepools : key => value
+    if value.name != ""
+  }
   name                  = each.key
   kubernetes_cluster_id = azurerm_kubernetes_cluster.allianz-demo-aks.id
   vm_size             = "Standard_DS2_v2"
   node_count          = 1
   enable_auto_scaling   = true
-  max_count             = 3
-  min_count             = 0
+  max_count             = each.value.max_count
+  min_count             = each.value.min_count
   node_labels = {
-    "purpose" = "jenkins-agents"
+    "purpose" = each.value.purpose
   }
 }

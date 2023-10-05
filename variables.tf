@@ -18,7 +18,12 @@ variable "aks_name" {
   type        = string
 }
 
-variable "additional_nodepool_names" {
-  description = "Name of Additional Node Pool"
-  type        = set(string)
+variable "additional_nodepools" {
+  description = "Name of Additional Node Pools"
+  type        = map(object({
+                    name = string
+                    purpose = string
+                    min_count = number
+                    max_count = number
+                }))
 }
