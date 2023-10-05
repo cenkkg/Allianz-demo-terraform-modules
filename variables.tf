@@ -18,7 +18,7 @@ variable "aks_name" {
   type        = string
 }
 
-variable "nodepool_name" {
-  description = "Name of Node Pool"
-  type        = string
+variable "additional_nodepool_names" {
+  description = "Name of Additionl Node Pool"
+  type        = set(string)
 }

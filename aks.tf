@@ -32,8 +32,13 @@ resource "azurerm_role_assignment" "allianz-demo-aks-ra" {
   skip_service_principal_aad_check = true
 }
 
-resource "azurerm_kubernetes_cluster_node_pool" "allianz-demo-nodepool" {
-  name                = var.nodepool_name
+resource "azurerm_kubernetes_cluster_node_pool" "allianz-demo-nodepools" {
+
+  for_each = toset([
+    for key in var.additional_nodepool_names : key
+    if key != ""
+  ])
+  name                  = each.key
   kubernetes_cluster_id = azurerm_kubernetes_cluster.allianz-demo-aks.id
   vm_size             = "Standard_DS2_v2"
   node_count          = 1

@@ -18,6 +18,6 @@ output "aks_ra_principal_id" {
   value = azurerm_role_assignment.allianz-demo-aks-ra.principal_id
 }
 
-output "aks_nodepool_name" {
-  value = azurerm_kubernetes_cluster_node_pool.allianz-demo-nodepool.name
+output "aks_nodepool_names" {
+  value = azurerm_kubernetes_cluster_node_pool.allianz-demo-nodepools.name
 }
