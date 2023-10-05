@@ -19,5 +19,5 @@ output "aks_ra_principal_id" {
 }
 
 output "aks_nodepool_names" {
-  value = azurerm_kubernetes_cluster_node_pool.allianz-demo-nodepools.name
+  value = var.additional_nodepool_names
 }
