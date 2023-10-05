@@ -1,10 +1,10 @@
 resource "azurerm_resource_group" "allianz-demo-aks-rg" {
-  name     = "allianz-demo-aks-rg"
-  location = "westeurope"
+  name     = var.rg-name
+  location = var.rg-location
 }
 
 resource "azurerm_container_registry" "allianz-demo-acr" {
-  name                = "allianzdemoacr"
+  name                = var.acr-name
   resource_group_name = azurerm_resource_group.allianz-demo-aks-rg.name
   location            = azurerm_resource_group.allianz-demo-aks-rg.location
   sku                 = "Standard"
@@ -12,7 +12,7 @@ resource "azurerm_container_registry" "allianz-demo-acr" {
 
 resource "azurerm_kubernetes_cluster" "allianz-demo-aks" {
   location            = azurerm_resource_group.allianz-demo-aks-rg.location
-  name                = "allianz-demo-aks"
+  name                = var.aks-name
   resource_group_name = azurerm_resource_group.allianz-demo-aks-rg.name
   dns_prefix          = "allianz-demo-aks"
   identity {
@@ -33,7 +33,7 @@ resource "azurerm_role_assignment" "allianz-demo-aks-ra" {
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "allianz-demo-nodepool" {
-  name                = "tesknodepool"
+  name                = var.nodepool-name
   kubernetes_cluster_id = azurerm_kubernetes_cluster.allianz-demo-aks.id
   vm_size             = "Standard_DS2_v2"
   node_count          = 1
